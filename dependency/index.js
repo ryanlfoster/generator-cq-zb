@@ -5,7 +5,7 @@ var yeoman = require('yeoman-generator');
 var chalk = require('chalk');
 var fs = require('fs');
 
-var _ = require('underscore');
+var _ = require('lodash');
 _.str = require('underscore.string');
 
 var DependencyGenerator = yeoman.generators.NamedBase.extend({
