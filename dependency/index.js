@@ -46,7 +46,7 @@ var DependencyGenerator = yeoman.generators.NamedBase.extend({
 
     addDependency: function() {
 
-        var bowerHook = '//===== bowerhook =====//',
+        var bowerHook = '//===== bowerHook =====//',
             exportsHook = '//===== exportsHook =====//',
             path = 'bower.json',
             file,
