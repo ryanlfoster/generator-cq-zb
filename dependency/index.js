@@ -27,7 +27,7 @@ var DependencyGenerator = yeoman.generators.NamedBase.extend({
             type: 'input',
             name: 'versionNumber',
             message: 'What\'s the version of the dependency?',
-            default: 'src/main/content/jcr_root/apps/'
+            default: 'latest'
         }, {
             type: 'input',
             name: 'mainFile',
@@ -46,17 +46,28 @@ var DependencyGenerator = yeoman.generators.NamedBase.extend({
 
     addDependency: function() {
 
-        var bowerHook = '//===== yeoman hook 1 =====//',
-            exportsHook = '//===== yeoman hook 2 =====//',
+        var bowerHook = '//===== bowerhook =====//',
+            exportsHook = '//===== exportsHook =====//',
             path = 'bower.json',
-            file = this.readFileAsString(path),
-            bowerHookReplace = ',"' + this.dependencyName + '"' + ': ' + '"~' + this.versionNumber + '"',
+            file,
+            bowerHookReplace = ',"' + this.dependencyName + '"' + ': ' + '"' + (this.versionNumber == '' ? '' : '~') + this.versionNumber + '"',
             exportsHookReplace = ',"' + this.dependencyName + '"' + ': ' + '{ "js": "' + this.mainFile + '" }';
 
-        file = file.replace(bowerHook, bowerHookReplace + '\n        ' + bowerHook);
-        file = file.replace(exportsHook, exportsHookReplace + '\n        ' + exportsHook);
+        if (fs.existsSync(path)) {
+            file = this.readFileAsString(path);
 
-        this.write(path, file);
+            if (file.indexOf(bowerHook) === -1 || file.indexOf(exportsHook) === -1) {
+                this.log(chalk.red('You need to have both hooks properly placed inside your bower.json'));
+            } else {
+                file = file.replace(bowerHook, bowerHookReplace + '\n        ' + bowerHook);
+                file = file.replace(exportsHook, exportsHookReplace + '\n        ' + exportsHook);
+
+                this.write(path, file);
+            }
+
+        } else {
+            this.log(chalk.red('You need to have a bower.json file in order to be able to add a dependency'));
+        }
 
     }
 });
