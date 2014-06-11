@@ -34,9 +34,15 @@ var CqngGenerator = yeoman.generators.NamedBase.extend({
         }, {
             type: 'input',
             name: 'projectName',
-            message: 'What\'s the name of the project? (this folder will be inside the previous path. Something like /src/main/content/jcr_root/apps/kids)',
+            message: 'What\'s the name of the project? (this folder will be inside the previous path.)',
+            default: 'lodges/components/modules',
             validate: self._validateRequired
-        }, {
+        },{
+            type: 'input',
+            name: 'componentGroup',
+            message: 'Component Group?',
+            default: 'Travel Lodges website'
+        },{
             type: 'input',
             name: 'componentTitle',
             message: 'Title for the component?',
@@ -52,6 +58,7 @@ var CqngGenerator = yeoman.generators.NamedBase.extend({
 
             this.appsFolder = props.appsFolder;
             this.projectName = props.projectName;
+            this.componentGroup = props.componentGroup;
             this.componentTitle = props.componentTitle;
             this.componentDescription = props.componentDescription;
 
@@ -61,11 +68,19 @@ var CqngGenerator = yeoman.generators.NamedBase.extend({
 
     generateFiles: function() {
 
-        this.mkdir(this.appsFolder + this.projectName + "/" + this.componentName);
+        var lodashParams = {
+            escape: /\$+\{+([\s\S]+?)+\}/g
+            };
+
+        this.mkdir(this.appsFolder + this.projectName + "/" + _.capitalize(this.componentName));
 
         this.template('componentName/_componentName.java', this._getPath(_.capitalize(this.componentName)) + '.java');
         this.template('componentName/_template.jsp', this._getPath('template.jsp'));
         this.template('componentName/content.xml', this._getPath('.content.xml'));
+
+        //Adding Design Dialog and basic tab
+        this.template('componentName/_tab-ngs-basic.xml', this._getPath('tab-ngs-basic.xml'));
+        this.template('componentName/_design_dialog.xml', this._getPath('design_dialog.xml'));
 
         // Clientlib related files
         this.mkdir(this._getPath("clientlib"));
@@ -89,7 +104,7 @@ var CqngGenerator = yeoman.generators.NamedBase.extend({
     },
 
     _getPath: function(f) {
-        return this.appsFolder + this.projectName + "/" + this.componentName + "/" + f
+        return this.appsFolder + this.projectName + "/" + _.capitalize(this.componentName) + "/" + f
     }
 });
 

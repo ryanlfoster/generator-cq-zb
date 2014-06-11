@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="cq:Panel"
+    title="Basic">
+    <items jcr:primaryType="cq:WidgetCollection">
+        <exampleText
+            jcr:primaryType="cq:Widget"
+            fieldDescription="Example text field"
+            fieldLabel="Example text field"
+            name="./exampleText"
+            xtype="textfield"/>
+    </items>
+</jcr:root>

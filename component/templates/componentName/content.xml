@@ -3,4 +3,4 @@
     jcr:description="<%= componentDescription %>"
     jcr:primaryType="cq:Component"
     jcr:title="<%= componentTitle %>"
-    componentGroup="<%= componentNameCapitalized %>"/>
+    componentGroup="<%= componentGroup %>"/>
