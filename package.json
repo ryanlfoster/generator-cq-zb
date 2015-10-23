@@ -1,14 +1,14 @@
 {
-    "name": "generator-cqng",
-    "version": "0.0.0",
+    "name": "generator-aem-zb",
+    "version": "1.2.0",
     "description": "Yeoman generator",
     "license": "MIT",
     "main": "app/index.js",
-    "repository": "framini/generator-cqng",
+    "repository": "ryanlfoster/generator-cq-zb",
     "author": {
         "name": "",
         "email": "",
-        "url": "https://github.com/framini"
+        "url": "https://github.com/ryanlfoster"
     },
     "engines": {
         "node": ">=0.10.0"
@@ -17,7 +17,7 @@
         "test": "mocha"
     },
     "files": [
-        "app"
+        "generators"
     ],
     "keywords": [
         "yeoman-generator"
@@ -28,10 +28,10 @@
         "lodash": "^2.4.1",
         "underscore.string": "^2.3.3"
     },
-    "devDependencies": {
-        "mocha": "*"
-    },
     "peerDependencies": {
         "yo": ">=1.0.0"
+    },
+    "devDependencies": {
+        "mocha": "*"
     }
 }
